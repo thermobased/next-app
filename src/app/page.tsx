@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 
 
-
+//page tsx
 
 
 export default function Home() {
