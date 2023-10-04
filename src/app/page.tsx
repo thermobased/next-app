@@ -12,12 +12,12 @@ export default function Home() {
     const formData = new FormData(event.currentTarget)
     const response = await fetch('/api/submit', {
       method: 'POST',
-      body: formData,
+      body: Array.from(formData.entries()),
     })
  
     // Handle response if necessary
     const data = await response.json()
-    alert(data)
+    alert(JSON.stringify(data))
     // const app = document.getElementById("info");
     // app.textContent = data;
   }
