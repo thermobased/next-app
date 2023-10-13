@@ -1,18 +1,25 @@
 'use client';
 import Image from 'next/image'
 import styles from './page.module.css'
-// import * as fs from "fs";
-
-// const userFiles = fs.readFileSync('./src/pages/page1.txt', 'utf-8');
 
 export default function Home() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
  
     const formData = new FormData(event.currentTarget)
+
+    const x = {};
+
+    for (var pair of formData.entries()) {
+      x[pair[0]] = pair[1];
+      console.log(pair[0]+ ', ' + pair[1]);
+    }
+
+    console.log(x);
+
     const response = await fetch('/api/submit', {
       method: 'POST',
-      body: Array.from(formData.entries()),
+      body: JSON.stringify(x),
     })
  
     // Handle response if necessary
