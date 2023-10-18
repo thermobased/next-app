@@ -9,7 +9,7 @@ export default async function handler(
 
   const reqBody = JSON.parse(req.body);
 
-  const filePath = "src/pages/" + reqBody.name;
+  const filePath = "files-to-browse/" + reqBody.name;
 
   const userFiles = fs.readFileSync(filePath, 'utf-8');
 
