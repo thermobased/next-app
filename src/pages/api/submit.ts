@@ -10,7 +10,8 @@ export default async function handler(
 ) {
 
   const newLoginInfo = JSON.parse(req.body);
-  const newUser = prisma.user.create({
+  /*process.stdout.write("hello: ");*/
+  const newUser = await prisma.user.create({
     data: {
       login: newLoginInfo.login,
       password: newLoginInfo.password

@@ -1,6 +1,7 @@
 'use client';
 import { PrismaClient } from "@prisma/client"
 import RegisterUserForm from "@/app/RegisterUserForm";
+import {resolveAppleWebApp} from "next/dist/lib/metadata/resolvers/resolve-basics";
 
 
 const prisma = new PrismaClient();
@@ -39,17 +40,24 @@ export default function Home() {
   }
 */
 
-  return (
-      <div>
+    async function onSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        try{
+            await registerNewUser(formData);
+        }
+        catch (err){
+            console.log(err);
+        }
+        alert("asd");
+    }
 
-        <RegisterUserForm onSubmit = {async (data) => {
-            try{
-                await registerNewUser(data);
-            }
-            catch (err) {
-                console.log(err)}
-        }}/>
+    return (
 
-      </div>
+      <form onSubmit={onSubmit}>
+          <input type="text" name="login" />
+          <input type="password" name="password"/>
+          <button type="submit">Submit</button>
+      </form>
   );
 }
