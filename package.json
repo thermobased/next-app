@@ -9,14 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "sqlite": "^5.0.1"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
     "@types/node": "latest",
-    "@types/react-dom": "latest"
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "prisma": "^5.5.2",
+    "typescript": "latest"
   }
 }

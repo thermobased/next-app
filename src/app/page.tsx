@@ -1,10 +1,21 @@
 'use client';
-import Image from 'next/image'
-import styles from './page.module.css'
-import DisplayContents from "@/app/DisplayContents";
+import { PrismaClient } from "@prisma/client"
+import RegisterUserForm from "@/app/RegisterUserForm";
+
+
+const prisma = new PrismaClient();
+async function registerNewUser(user){
+    const response = await fetch('/api/submit', {
+        method: 'POST',
+        body: JSON.stringify(user)
+    });
+
+    return await response.json();
+}
+
 export default function Home() {
-    let responseData;
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+
+  /*async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const x = {};
@@ -26,16 +37,18 @@ export default function Home() {
                                             // const app = document.getElementById("info");
                                             // app.textContent = data;
   }
- 
+*/
+
   return (
       <div>
 
-        <form onSubmit={onSubmit}>
-            <input type="text" name="name" />
-            <button type="submit">Submit</button>
-        </form>
-
-        <DisplayContents/>
+        <RegisterUserForm onSubmit = {async (data) => {
+            try{
+                await registerNewUser(data);
+            }
+            catch (err) {
+                console.log(err)}
+        }}/>
 
       </div>
   );
