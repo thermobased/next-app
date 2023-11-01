@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^5.5.2",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
@@ -20,7 +19,6 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "prisma": "^5.5.2",
     "typescript": "latest"
   }
 }
