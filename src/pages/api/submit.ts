@@ -9,11 +9,15 @@ export default async function handler(
 
   const reqBody = JSON.parse(req.body);
 
-  const filePath = "files-to-browse/" + reqBody.name;
+  const action = reqBody.action;
+  const login =  reqBody.login;
+  const password = reqBody.password;
 
-  const userFiles = fs.readFileSync(filePath, 'utf-8');
-
-  const data = JSON.parse(req.body);
-  // const id = await createItem(data)
-  res.status(200).json({'req': userFiles})
+  if (action == 'register'){
+    res.status(200).json({'register': login})
+  } else if (action == 'login') {
+    res.status(200).json({'login': login})
+  } else {
+    res.status(500);
+  }
 }
