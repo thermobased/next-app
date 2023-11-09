@@ -16,15 +16,15 @@ export default function Home() {
      const response = await fetch('/api/submit', {
         method: 'POST',
         body: JSON.stringify({
-            'action': 'register',
             'login': x['login'],
-            'password': x['password']
+            'password': x['password'],
+            'action': 'register'
         })
     });
 
     const data = await response.json();
 
-    alert(JSON.stringify(data));
+    alert(JSON.stringify("registered!", data));
   }
 
     async function onSubmitLogin(event: FormEvent<HTMLFormElement>) {
@@ -40,15 +40,14 @@ export default function Home() {
         const response = await fetch('/api/submit', {
             method: 'POST',
             body: JSON.stringify({
-                'action': 'login',
                 'login': x['login'],
-                'password': x['password']
+                'password': x['password'],
+                'action': 'login'
             })
         });
 
         const data = await response.json();
-
-        alert(JSON.stringify(data));
+        alert(JSON.stringify("logged in!" + JSON.stringify(data)));
     }
 
 
