@@ -3,6 +3,7 @@ import {FormData} from "next/dist/compiled/@edge-runtime/primitives";
 import * as fs from "fs";
 import sqlite3 from "sqlite3";
 import { open, Database } from "sqlite";
+import { setCookie } from "cookies-next";
 
 let db = null;
 
@@ -40,6 +41,7 @@ export default async function handler(
 
     const item = await db.get("SELECT * FROM items WHERE login = ? AND password = ?", login, password);
     const temp = item.login;
+    setCookie('token', item.login, { req, res, maxAge: 60 * 60 * 24 });
     res.status(200).json({'login' : temp})
 
 

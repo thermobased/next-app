@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import DisplayContents from "@/app/DisplayContents";
+import {getCookie} from "cookies-next";
 export default function Home() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -48,6 +49,9 @@ export default function Home() {
 
         const data = await response.json();
         alert(JSON.stringify("logged in!" + JSON.stringify(data)));
+        alert(getCookie('token'));
+
+
     }
 
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "cookies-next": "^4.0.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
