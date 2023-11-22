@@ -1,9 +1,20 @@
 'use client';
-import Image from 'next/image'
-import styles from './page.module.css'
-import DisplayContents from "@/app/DisplayContents";
-import {getCookie} from "cookies-next";
-export default function Home() {
+import {CookieValueTypes, getCookie} from "cookies-next";
+import type {InferGetServerSidePropsType, GetServerSideProps} from "next";
+
+export const getServerSideProps = (async( { req, res }) => {
+
+    const login = getCookie('token', {req, res});
+    if(login){
+        return {props: {'login' : login}}
+    }   else {
+        return {props: {'login' : ''}}
+    }
+
+    }) satisfies GetServerSideProps<{login : CookieValueTypes}>;
+
+
+export default function Home({login}:InferGetServerSidePropsType<typeof getServerSideProps>) {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.currentTarget);
@@ -57,8 +68,12 @@ export default function Home() {
 
 
     return (
+
       <div>
 
+          <h1> {login} </h1>
+
+        <div>
         <form onSubmit={onSubmit}>
             <input type = "text" name = "login"/>
             <br/>
@@ -66,6 +81,8 @@ export default function Home() {
             <br/>
             <button type = "submit" value = "register" name = "action">Register</button>
         </form>
+
+
 
           <form onSubmit={onSubmitLogin}>
               <input type = "text" name = "login"/>
@@ -75,7 +92,8 @@ export default function Home() {
               <button type = "submit" value = "login" name = "action">Login</button>
           </form>
 
-        <DisplayContents/>
+        </div>
+
 
       </div>
   );

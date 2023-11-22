@@ -1,6 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {FormData} from "next/dist/compiled/@edge-runtime/primitives";
-import * as fs from "fs";
 import sqlite3 from "sqlite3";
 import { open, Database } from "sqlite";
 import { setCookie } from "cookies-next";
