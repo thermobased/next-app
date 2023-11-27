@@ -8,7 +8,7 @@ function RegisterForm (props) {
                 <br/>
                 <input type = "password" name = "password"/>
                 <br/>
-                <button type = "submit" value = "register" name = "action">Register</button>
+                <button type = "submit" value = "register" name = "action" disabled={props.isDisabled}>Register</button>
             </form>
         </div>
 

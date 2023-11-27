@@ -8,7 +8,7 @@ function LoginForm (props) {
                 <br/>
                 <input type = "password" name = "password"/>
                 <br/>
-                <button type = "submit" value = "login" name = "action">Login</button>
+                <button type = "submit" value = "login" name = "action" disabled={props.isDisabled}>Login</button>
             </form>
         </div>
 

@@ -2,6 +2,7 @@ import type {NextApiRequest, NextApiResponse} from 'next'
 import sqlite3 from "sqlite3";
 import {open, Database} from "sqlite";
 import {deleteCookie, setCookie} from "cookies-next";
+import {useRouter} from "next/navigation";
 
 let db = null;
 
@@ -15,6 +16,8 @@ export default async function handler(
     const action = reqBody.action;
     const login = reqBody.login;
     const password = reqBody.password;
+
+
 
     if (!db) {
         db = await open({
@@ -40,6 +43,7 @@ export default async function handler(
         const temp = item.login;
         setCookie('token', item.login, {req, res, maxAge: 60 * 60 * 24});
         res.status(200).json({'login': temp})
+
 
 
     } else if (action == 'logout') {

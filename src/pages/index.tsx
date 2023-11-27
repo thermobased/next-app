@@ -5,7 +5,7 @@ import AuthStatus from "@/pages/AuthStatus";
 import RegisterForm from "@/pages/RegisterForm";
 import LoginForm from "@/pages/LoginForm";
 import {useRouter} from "next/navigation";
-
+import {useEffect, useState} from "react";
 export const getServerSideProps = (async ({req, res}) => {
 
     const login = getCookie('token', {req, res});
@@ -20,13 +20,11 @@ export const getServerSideProps = (async ({req, res}) => {
 
 export default function Home({login}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const router = useRouter();
-   /* if (login != '') {
-        router.push("/");
-    }*/
-
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        setIsSubmitting(true);
         const formData = new FormData(event.currentTarget);
         const x = {};
 
@@ -47,10 +45,12 @@ export default function Home({login}: InferGetServerSidePropsType<typeof getServ
         const data = await response.json();
 
         alert(JSON.stringify("registered!", data));
+        setIsSubmitting(false);
     }
 
     async function onSubmitLogin(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        setIsSubmitting(true);
         const formData = new FormData(event.currentTarget);
         const x = {};
 
@@ -71,17 +71,23 @@ export default function Home({login}: InferGetServerSidePropsType<typeof getServ
         const data = await response.json();
         alert(JSON.stringify("logged in!" + JSON.stringify(data)));
         alert(getCookie('token'));
-
-
+        router.push('/profile');
+        setIsSubmitting(false);
     }
+
+    useEffect(() => {
+        if(login != ''){
+            router.push('/profile');
+        }
+    }, []);
 
 
     return (
         <div>
-            <AuthStatus login={login}/>
+            <AuthStatus login = {login}/>
             <div>
-                <RegisterForm submit={onSubmit}/>
-                <LoginForm submit={onSubmitLogin}/>
+                <RegisterForm submit = {onSubmit} isDisabled = {isSubmitting}/>
+                <LoginForm submit = {onSubmitLogin} isDisabled = {isSubmitting}/>
             </div>
         </div>
     );
