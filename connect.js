@@ -16,7 +16,7 @@ db.serialize(() => {
     db.run(
         `CREATE TABLE IF NOT EXISTS items (
         id INTEGER PRIMARY KEY,
-        login TEXT,
+        login TEXT UNIQUE,
         password TEXT
       )`,
         (err) => {
